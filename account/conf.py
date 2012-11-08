@@ -23,7 +23,7 @@ def load_path_attr(path):
 
 
 class AccountAppConf(AppConf):
-    
+
     OPEN_SIGNUP = True
     LOGIN_URL = "account_login"
     SIGNUP_REDIRECT_URL = "/"
@@ -40,6 +40,7 @@ class AccountAppConf(AppConf):
     EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
     EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "account_login"
     EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
+    EMAIL_CONFIRMATION_MODEL = 'account.EmailConfirmation'
     SETTINGS_REDIRECT_URL = "account_settings"
     NOTIFY_ON_PASSWORD_CHANGE = True
     DELETION_MARK_CALLBACK = "account.callbacks.account_delete_mark"
@@ -50,9 +51,9 @@ class AccountAppConf(AppConf):
         (code, get_language_info(code).get("name_local"))
         for code, lang in settings.LANGUAGES
     ]
-    
+
     def configure_deletion_mark_callback(self, value):
         return load_path_attr(value)
-    
+
     def configure_deletion_expunge_callback(self, value):
         return load_path_attr(value)
